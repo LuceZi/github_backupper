@@ -2,15 +2,19 @@ import os
 import json
 import time
 import requests
+import logging
+from logging.handlers import RotatingFileHandler
 
 from my_package import *
 
 def setup_logging(log_file="backup_log.txt"):
-    """設定日誌紀錄"""
+    """設置日誌紀錄，使用滾動日誌，最多 20MB（4 個 5MB 檔案）"""
+    handler = RotatingFileHandler(log_file, maxBytes=5*1024*1024, backupCount=3)
     logging.basicConfig(
-        filename=log_file,
         level=logging.INFO,
         format="%(asctime)s - %(levelname)s - %(message)s",
+        datefmt='%Y-%m-%d %H:%M:%S',
+        handlers=[handler],
     )
 
 class Scheduler:
@@ -105,16 +109,9 @@ def main():
     scheduler = Scheduler(config_file)
     
     setup_logging()
-
-    last_refresh = 0
-    current_time = time.time()
-    while True:
-        current_time = time.time()
-        if current_time - last_refresh > 3600:
-            scheduler.run()  # 執行主要任務
-            print("一次備份完成")
-            last_refresh = current_time
-        time.sleep(60)
+    logging.info("日誌初始化完成")
+    scheduler.run()  # 執行主要任務
+    print("一次備份完成")
 
 def startup():
     try:
