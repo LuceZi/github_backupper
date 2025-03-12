@@ -1,12 +1,38 @@
-# 忽略配置文件
-config.json
-
-# 忽略日志文件
-backup_log.txt
-
-# 忽略所有 .env 文件
-*.env
-
-# 忽略編譯後的檔案
+# Python 相關
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+
+# 虛擬環境
+venv/
+.env/
+.venv/
+
+# Vosk 模型（避免提交大檔案）
+models/vosk_model/
+
+# Log 檔案
+logs/
+*.log
+
+# 設定檔 & 測試結果
+*.ini
+*.json
+*.db
+*.sqlite3
+
+# Jupyter Notebook 記錄
+.ipynb_checkpoints/
+
+# IDE & 編輯器設定
+.vscode/
+.idea/
+*.sublime-workspace
+
+# OS 相關（macOS、Windows）
+.DS_Store
+Thumbs.db
+
+# 其他
+backups/

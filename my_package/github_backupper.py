@@ -3,7 +3,7 @@ import subprocess
 import logging
 from datetime import datetime
 
-def setup_logging(log_file="backup_log.txt"):
+def setup_logging(log_file="backup.log"):
     """設定日誌紀錄"""
     logging.basicConfig(
         filename=log_file,
